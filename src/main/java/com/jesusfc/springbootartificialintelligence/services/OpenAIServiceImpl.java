@@ -28,7 +28,15 @@ public class OpenAIServiceImpl implements OpenAIService {
 
   //      String content = chatClient.prompt(prompt).call().content();
 
-        ChatResponse response = chatClient.prompt(prompt).call().chatResponse();
-        return response.getResult().getOutput().getContent();
+       ChatResponse response = chatClient.prompt(prompt).call().chatResponse();
+       return response.getResult().getOutput().getContent();
+/*
+        Flux<String> output = chatClient.prompt()
+                .user(question)
+                .stream()
+                .content();
+
+        return output.blockFirst();
+*/
     }
 }
