@@ -1,0 +1,1 @@
+¿Cual es la capital de {country}?
