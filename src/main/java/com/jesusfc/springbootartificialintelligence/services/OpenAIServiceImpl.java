@@ -15,7 +15,7 @@ import java.util.Map;
 
 /**
  * Author Jesús Fdez. Caraballo
- * jesus.fdez.caraballo@gmail.com
+ * jfcaraballo@gmail.com
  * Created on may - 2024
  */
 @Service
@@ -26,7 +26,6 @@ public class OpenAIServiceImpl implements OpenAIService {
     @Value("classpath:templates/get-capital-prompt.st")
     private Resource getCapitalPrompt;
 
-
     public OpenAIServiceImpl(ChatClient.Builder chatClientBuilder) {
         this.chatClient = chatClientBuilder.build();
     }
@@ -36,19 +35,14 @@ public class OpenAIServiceImpl implements OpenAIService {
     public String getAnswer(String question) {
         PromptTemplate promptTemplate = new PromptTemplate(question);
         Prompt prompt = promptTemplate.create();
+        ChatResponse response = chatClient.prompt(prompt).call().chatResponse();
+        return response.getResult().getOutput().getContent();
+    }
 
-  //      String content = chatClient.prompt(prompt).call().content();
-
-       ChatResponse response = chatClient.prompt(prompt).call().chatResponse();
-       return response.getResult().getOutput().getContent();
-/*
-        Flux<String> output = chatClient.prompt()
-                .user(question)
-                .stream()
-                .content();
-
-        return output.blockFirst();
-*/
+    @Override
+    public String getAnswer(Prompt prompt) {
+        ChatResponse response = chatClient.prompt(prompt).call().chatResponse();
+        return response.getResult().getOutput().getContent();
     }
 
     @Override

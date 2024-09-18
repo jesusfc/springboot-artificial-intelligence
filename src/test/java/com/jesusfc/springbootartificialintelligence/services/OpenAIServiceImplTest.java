@@ -6,7 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 /**
  * Author Jesús Fdez. Caraballo
- * jesus.fdez.caraballo@gmail.com
+ * jfcaraballo@gmail.com
  * Created on may - 2024
  */
 @SpringBootTest

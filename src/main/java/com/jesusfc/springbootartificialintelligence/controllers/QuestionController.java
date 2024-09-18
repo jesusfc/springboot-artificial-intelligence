@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Author Jesús Fdez. Caraballo
- * jesus.fdez.caraballo@gmail.com
+ * jfcaraballo@gmail.com
  * Created on sept - 2024
  */
 @RestController
@@ -27,7 +27,7 @@ public class QuestionController {
         return openAIService.getAnswer(question);
     }
 
-    @PostMapping("/askCapìtalOf")
+    @PostMapping("/askCapitalOf")
     public Answer askCapitalOf(@RequestBody CapitalRQ country) {
         return openAIService.getCapital(country);
     }
