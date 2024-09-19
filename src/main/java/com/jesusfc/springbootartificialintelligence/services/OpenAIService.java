@@ -20,4 +20,5 @@ public interface OpenAIService {
 
     Answer getCapital(CapitalRQ capitalRQ);
 
+    Answer getRagAnswer(Question question);
 }

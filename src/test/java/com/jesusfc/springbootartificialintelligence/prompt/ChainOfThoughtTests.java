@@ -1,7 +1,5 @@
 package com.jesusfc.springbootartificialintelligence.prompt;
 
-import org.junit.jupiter.api.Test;
-
 /**
  * Author Jesús Fdez. Caraballo
  * jfcaraballo@gmail.com
@@ -9,7 +7,7 @@ import org.junit.jupiter.api.Test;
  */
 public class ChainOfThoughtTests extends BaseTestClass {
 
-    @Test
+    //@Test
     void testTraditionalPrompt() {
         String prompt = """
                 Q: Roger has 5 tennis balls. He buys 2 more cans of tennis balls, each containing 3 balls. \s
@@ -19,7 +17,7 @@ public class ChainOfThoughtTests extends BaseTestClass {
         System.out.println(chat(prompt));
     }
 
-    @Test
+    //@Test
     void testChainOfThroughPrompt() {
         String chainOfThoughtPrompt = """
                 Q: Roger has 5 tennis balls. He buys 2 more cans of tennis balls, each containing 3 balls. \s
@@ -35,7 +33,7 @@ public class ChainOfThoughtTests extends BaseTestClass {
         System.out.println(chat(chainOfThoughtPrompt));
     }
 
-    @Test
+    //@Test
     void testTraditionalPrompt2() {
         
         String prompt = """

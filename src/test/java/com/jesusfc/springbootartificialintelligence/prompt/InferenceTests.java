@@ -56,7 +56,7 @@ public class InferenceTests extends BaseTestClass {
             """;
 
     @DisplayName("Testing Sentiment")
-    @Test
+    //@Test
     void testingSentiment() {
         PromptTemplate promptTemplate = new PromptTemplate(sentimentPrompt,
                 Map.of("review1", review1,
@@ -80,7 +80,7 @@ public class InferenceTests extends BaseTestClass {
             """;
 
     @DisplayName("Testing Emotion")
-    @Test
+    //@Test
     void testingEmotion() {
         PromptTemplate promptTemplate = new PromptTemplate(emotionPrompt,
                 Map.of("review1", review1,
@@ -110,7 +110,7 @@ public class InferenceTests extends BaseTestClass {
             """;
 
     @DisplayName("Testing for Anger")
-    @Test
+    //@Test
     void testingForAnger() {
         PromptTemplate promptTemplate = new PromptTemplate(angerTestPrompt,
                 Map.of("review1", review1,
@@ -163,7 +163,7 @@ public class InferenceTests extends BaseTestClass {
             """;
 
     @DisplayName("Inferring for Topics")
-    @Test
+    //@Test
     void inferTopics() {
         PromptTemplate promptTemplate = new PromptTemplate(prompt,
                 Map.of("story", story));

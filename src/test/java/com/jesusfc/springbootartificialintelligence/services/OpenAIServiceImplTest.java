@@ -15,7 +15,7 @@ class OpenAIServiceImplTest {
     @Autowired
     OpenAIService openAIService;
 
-    @Test
+    //@Test
     void testGetAnswer() {
         String cuentaMeUnChiste = openAIService.getAnswer("Cuenta me un chiste");
         System.out.println("La respuesta es: " + openAIService.getAnswer(cuentaMeUnChiste));

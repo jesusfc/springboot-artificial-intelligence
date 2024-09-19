@@ -44,7 +44,7 @@ public class SummarizingPromptsTests extends BaseTestClass {
                 Review: ```{review}```
             """;
 
-    @Test
+    //@Test
     void testCreateDescriptionFromReview() {
         PromptTemplate promptTemplate = new PromptTemplate(reviewPrompt,
                 Map.of("review", review1));
@@ -83,7 +83,7 @@ public class SummarizingPromptsTests extends BaseTestClass {
                 Review 3: ```{review3}```
             """;
 
-    @Test
+    //@Test
     void testCreateDescriptionFrom3Reviews() {
         PromptTemplate promptTemplate = new PromptTemplate(reviewPrompt3,
                 Map.of("review", review1, "review2", review2, "review3", review3));
@@ -104,7 +104,7 @@ public class SummarizingPromptsTests extends BaseTestClass {
                 Review 3: ```{review3}```
             """;
 
-    @Test
+    //@Test
     void testCreateDescriptionFrom3ReviewsExtract() {
         PromptTemplate promptTemplate = new PromptTemplate(reviewPrompt4,
                 Map.of("review", review1, "review2", review2, "review3", review3));

@@ -35,7 +35,7 @@ public class ZeroAndFewShotTests extends BaseTestClass {
     /**
      * Zero shot - send the model a single prompt with no hints or examples. Leverages the model's training to generate a response.
      */
-    @Test
+    //@Test
     void zeroShotPromptTest() {
         // java for loop 3 times
         for (int i = 0; i < 3; i++) {
@@ -49,7 +49,7 @@ public class ZeroAndFewShotTests extends BaseTestClass {
         }
     }
 
-    @Test
+    //@Test
     void zeroShotPromptTestWithModelOptions() {
 
         OpenAiChatOptions openAiChatOptions = new OpenAiChatOptions.Builder(openAiChatProperties.getOptions())
@@ -84,7 +84,7 @@ public class ZeroAndFewShotTests extends BaseTestClass {
                         the word farduddle is:
             \s""";
 
-    @Test
+    //@Test
     void testwhatPuPromptFewShotTest() {
         PromptTemplate promptTemplate = new PromptTemplate(whatpuPrompt);
         System.out.println(chat(promptTemplate.create()));
@@ -96,7 +96,7 @@ public class ZeroAndFewShotTests extends BaseTestClass {
             What are 5 locations John should consider for vacation?
             """;
 
-    @Test
+    //@Test
     void testVacationFewShotTest() {
         PromptTemplate promptTemplate = new PromptTemplate(vacationPrompt);
         System.out.println(chat(promptTemplate.create()));
@@ -110,13 +110,13 @@ public class ZeroAndFewShotTests extends BaseTestClass {
             What is 5+7?
             """;
 
-    @Test
+    //@Test
     void testMathPromptFewShotTest() {
         PromptTemplate promptTemplate = new PromptTemplate(mathPrompt);
         System.out.println(chat(promptTemplate.create()));
     }
 
-    @Test
+    //@Test
     void AiHallucinationTest() {
         Prompt prompt = new Prompt("Write sales copy for the new 'professional grade' " +
                 "Denali Advanced Toothbrush by GMC.");

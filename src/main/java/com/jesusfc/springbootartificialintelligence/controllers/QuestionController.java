@@ -31,4 +31,9 @@ public class QuestionController {
     public Answer askCapitalOf(@RequestBody CapitalRQ country) {
         return openAIService.getCapital(country);
     }
+
+    @PostMapping("/askRagQuestion")
+    public Answer askRagQuestion(@RequestBody Question question) {
+        return openAIService.getRagAnswer(question);
+    }
 }

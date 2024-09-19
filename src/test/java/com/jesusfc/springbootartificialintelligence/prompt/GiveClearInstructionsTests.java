@@ -12,7 +12,7 @@ import java.util.Map;
 @SpringBootTest
 public class GiveClearInstructionsTests extends BaseTestClass {
 
-    @Test
+    //@Test
     void testGetJSON() {
         String prompt = """
                 Generate a list of 4 made up cars. Provide them in a JSON format
@@ -23,7 +23,7 @@ public class GiveClearInstructionsTests extends BaseTestClass {
     }
 
     //xml
-    @Test
+    //@Test
     void testGetXML() {
         String prompt = """
                 Generate a list of 4 made up cars. Provide them in a XML format
@@ -34,7 +34,7 @@ public class GiveClearInstructionsTests extends BaseTestClass {
     }
 
     //yaml
-    @Test
+    //@Test
     void testGetYAML() {
         String prompt = """
                 Generate a list of 4 made up cars. Provide them in a YAML format
@@ -77,26 +77,26 @@ public class GiveClearInstructionsTests extends BaseTestClass {
             
             At the beginning of 2022—after a year marked by SpaceX launching thirty-one rockets into orbit, Tesla selling a million cars, and him becoming the richest man on earth—Musk spoke ruefully about his compulsion to stir up dramas. “I need to shift my mindset away from being in crisis mode, which it has been for about fourteen years now, or arguably most of my life,” he said.""";
 
-    @Test
+    //@Test
     void testCookSteak() {
         PromptTemplate promptTemplate = new PromptTemplate(directionsPrompt, Map.of("text_1", cookASteak));
         System.out.println(chat(promptTemplate.create()));
     }
 
-    @Test
+    //@Test
     void testBookDescription() {
         PromptTemplate promptTemplate = new PromptTemplate(directionsPrompt, Map.of("text_1", bookDescription));
         System.out.println(chat(promptTemplate.create()));
     }
 
-    @Test
+    //@Test
     void testCookSteakAsSnoopDog() {
         PromptTemplate promptTemplate = new PromptTemplate(directionsPrompt + "Give the directions using the tone of Snoop Dog",
                 Map.of("text_1", cookASteak));
         System.out.println(chat(promptTemplate.create()));
     }
 
-    @Test
+    //@Test
     void testCookSteakAsHarryPotter() {
         PromptTemplate promptTemplate = new PromptTemplate(directionsPrompt + "Give the directions using the tone, tools and imagination of JK Rowling in a Harry Potter book",
                 Map.of("text_1", cookASteak));

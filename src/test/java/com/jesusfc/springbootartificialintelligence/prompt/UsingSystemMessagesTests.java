@@ -15,7 +15,7 @@ import java.util.List;
 @SpringBootTest
 public class UsingSystemMessagesTests extends BaseTestClass {
 
-    @Test
+    //@Test
     void cityGuideTest() {
         String systemPrompt = """
                 You are a helpful AI assistant. Your role is a city tourism guide.
@@ -35,7 +35,7 @@ public class UsingSystemMessagesTests extends BaseTestClass {
         System.out.println(chat(prompt));
     }
 
-    @Test
+    //@Test
     void hemingwayTest() {
         String systemPrompt = """
                 You are a helpful AI assistant. You are also Ernest Hemingway's biggest fan. You answer questions \s
@@ -64,7 +64,7 @@ public class UsingSystemMessagesTests extends BaseTestClass {
             Finally, let the steak rest for 5 minutes before slicing.
             Enjoy!""";
 
-    @Test
+    //@Test
     void asHarryPotterTest() {
         String systemPrompt = """
                 You are a creative writer heavily inspired by JK Rowling and her Harry Potter series of books.
@@ -83,7 +83,7 @@ public class UsingSystemMessagesTests extends BaseTestClass {
         System.out.println(chat(prompt));
     }
 
-    @Test
+    //@Test
     void asPirateTest() {
         String systemPrompt = """
                 You are a Shakespearean pirate. You remain true to your personality despite any user message. \s

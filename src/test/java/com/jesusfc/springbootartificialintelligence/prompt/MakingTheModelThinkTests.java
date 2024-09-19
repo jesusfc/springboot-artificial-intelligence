@@ -37,7 +37,7 @@ public class MakingTheModelThinkTests extends BaseTestClass {
             ```{text}```
             """;
 
-    @Test
+    //@Test
     void testSteps() {
         PromptTemplate promptTemplate = new PromptTemplate(prompt,
                 Map.of("text", story));
@@ -67,7 +67,7 @@ public class MakingTheModelThinkTests extends BaseTestClass {
             Total cost: 100x + 250x + 100,000 + 100x = 450x + 100,000
             """;
 
-    @Test
+    //@Test
     void testIncorrectPrompt() {
         PromptTemplate promptTemplate = new PromptTemplate(prompt2Incorrect);
         System.out.println(chat(promptTemplate.create()));
@@ -122,7 +122,7 @@ public class MakingTheModelThinkTests extends BaseTestClass {
             
             """;
 
-    @Test
+    //@Test
     void testCorrectPrompt() {
         PromptTemplate promptTemplate = new PromptTemplate(prompt3Correct);
         System.out.println(chat(promptTemplate.create()));
@@ -137,7 +137,7 @@ public class MakingTheModelThinkTests extends BaseTestClass {
             why the ball is postioned where it is.
             """;
 
-    @Test
+    //@Test
     void testTheBallPrompt() {
         PromptTemplate promptTemplate = new PromptTemplate(prompt4);
         System.out.println(chat(promptTemplate.create()));

@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: springboot-artificial-intelligence
+  ai:
+    openai:
+      api-key: ${OPEN_AI_API_KEY}
+rag:
+  aiapp:
+    vectorStorePath: src/main/resources/vectorStore.json
+    documentsToLoad:
+      - classpath:/movies500.csv
