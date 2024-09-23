@@ -10,7 +10,6 @@ import org.springframework.ai.chat.prompt.PromptTemplate;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.SimpleVectorStore;
-import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
@@ -28,7 +27,6 @@ public class OpenAIServiceImpl implements OpenAIService {
 
     private final ChatClient chatClient;
     private final SimpleVectorStore simpleVectorStore;
-    private final VectorStore milvusVectorStore;
 
     // SIN metadatos
     //@Value("classpath:templates/rag-prompt-template.st")
@@ -41,10 +39,9 @@ public class OpenAIServiceImpl implements OpenAIService {
     @Value("classpath:templates/get-capital-prompt.st")
     private Resource getCapitalPrompt;
 
-    public OpenAIServiceImpl(ChatClient.Builder chatClientBuilder, SimpleVectorStore simpleVectorStore, VectorStore milvusVectorStore) {
+    public OpenAIServiceImpl(ChatClient.Builder chatClientBuilder, SimpleVectorStore simpleVectorStore) {
         this.chatClient = chatClientBuilder.build();
         this.simpleVectorStore = simpleVectorStore;
-        this.milvusVectorStore = milvusVectorStore;
     }
 
 
@@ -82,16 +79,6 @@ public class OpenAIServiceImpl implements OpenAIService {
     @Override
     public Answer getRagAnswer(Question question) {
         List<Document> documents = simpleVectorStore.similaritySearch(SearchRequest.query(question.question()).withTopK(4));
-        List<String> contentList = documents.stream().map(Document::getContent).toList();
-        PromptTemplate promptTemplate = new PromptTemplate(getRagPromptTemplate);
-        Prompt prompt = promptTemplate.create(Map.of("input", question.question(), "documents", String.join("\n", contentList)));
-        ChatResponse response = chatClient.prompt(prompt).call().chatResponse();
-        return new Answer(response.getResult().getOutput().getContent());
-    }
-
-    @Override
-    public Answer getMilvusRagAnswer(Question question) {
-        List<Document> documents = milvusVectorStore.similaritySearch(SearchRequest.query(question.question()).withTopK(4));
         List<String> contentList = documents.stream().map(Document::getContent).toList();
         PromptTemplate promptTemplate = new PromptTemplate(getRagPromptTemplate);
         Prompt prompt = promptTemplate.create(Map.of("input", question.question(), "documents", String.join("\n", contentList)));
