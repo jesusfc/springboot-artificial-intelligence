@@ -10,22 +10,8 @@ spring:
       chat:
         options:
           model: gpt-4-turbo
-  vectorstore:
-    milvus:
-      client:
-        host: "localhost"
-        port: 19530
-        username: "root"
-        password: "milvus"
-      databaseName: "default"
-      collectionName: "vector_store"
-      embeddingDimension: 1536
-      indexType: IVF_FLAT
-      metricType: COSINE
 rag:
   aiapp:
     vectorStorePath: src/main/resources/vectorStore.json
     documentsToLoad:
       - classpath:/movies500.csv
-      # Samsung Galaxy s24
-      - https://www.gsmarena.com/samsung_galaxy_s24-12773.php

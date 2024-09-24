@@ -5,5 +5,3 @@
 - Maven project
 - Spring IA version 1.0.0-M2
 - Tika Document Reader
-- [Milvus](https://milvus.io/), Vector database
-  - [Instalación](https://milvus.io/docs/es/install_standalone-docker-compose.md) con Docker-Compose
