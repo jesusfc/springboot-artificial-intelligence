@@ -1,7 +1,6 @@
 package com.jesusfc.springbootartificialintelligence.prompt;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.springframework.ai.chat.prompt.PromptTemplate;
 import org.springframework.boot.test.context.SpringBootTest;
 

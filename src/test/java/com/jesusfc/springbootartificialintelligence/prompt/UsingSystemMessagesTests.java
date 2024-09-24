@@ -1,6 +1,5 @@
 package com.jesusfc.springbootartificialintelligence.prompt;
 
-import org.junit.jupiter.api.Test;
 import org.springframework.ai.chat.messages.Message;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.chat.prompt.PromptTemplate;
