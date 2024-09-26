@@ -2,6 +2,7 @@ package com.jesusfc.springbootartificialintelligence.controllers;
 
 import com.jesusfc.springbootartificialintelligence.model.Answer;
 import com.jesusfc.springbootartificialintelligence.model.CapitalRQ;
+import com.jesusfc.springbootartificialintelligence.model.CelebrityRQ;
 import com.jesusfc.springbootartificialintelligence.model.Question;
 import com.jesusfc.springbootartificialintelligence.services.OpenAIService;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,5 +36,10 @@ public class QuestionController {
     @PostMapping("/askRagQuestion")
     public Answer askRagQuestion(@RequestBody Question question) {
         return openAIService.getRagAnswer(question);
+    }
+
+    @PostMapping("/askCelebrityCityQuestion")
+    public Answer askNinjaApiCelebrityQuestion(@RequestBody CelebrityRQ celebrityRQ) {
+        return openAIService.getNinjaApiCelebrityAnswer(celebrityRQ);
     }
 }

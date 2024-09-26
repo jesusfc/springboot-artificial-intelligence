@@ -2,6 +2,7 @@ package com.jesusfc.springbootartificialintelligence.services;
 
 import com.jesusfc.springbootartificialintelligence.model.Answer;
 import com.jesusfc.springbootartificialintelligence.model.CapitalRQ;
+import com.jesusfc.springbootartificialintelligence.model.CelebrityRQ;
 import com.jesusfc.springbootartificialintelligence.model.Question;
 import org.springframework.ai.chat.prompt.Prompt;
 
@@ -21,4 +22,6 @@ public interface OpenAIService {
     Answer getCapital(CapitalRQ capitalRQ);
 
     Answer getRagAnswer(Question question);
+
+    Answer getNinjaApiCelebrityAnswer(CelebrityRQ celebrityRQ);
 }

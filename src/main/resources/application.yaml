@@ -15,3 +15,6 @@ rag:
     vectorStorePath: src/main/resources/vectorStore.json
     documentsToLoad:
       - classpath:/movies500.csv
+ninja-api:
+  api-url: https://api.api-ninjas.com/v1/celebrity
+  api-key: ${NINJA_API_KEY}
