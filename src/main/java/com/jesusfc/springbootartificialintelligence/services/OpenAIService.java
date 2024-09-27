@@ -1,10 +1,10 @@
 package com.jesusfc.springbootartificialintelligence.services;
 
-import com.jesusfc.springbootartificialintelligence.model.Answer;
-import com.jesusfc.springbootartificialintelligence.model.CapitalRQ;
-import com.jesusfc.springbootartificialintelligence.model.CelebrityRQ;
-import com.jesusfc.springbootartificialintelligence.model.Question;
+import com.jesusfc.springbootartificialintelligence.model.*;
 import org.springframework.ai.chat.prompt.Prompt;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 /**
  * Author Jesús Fdez. Caraballo
@@ -24,4 +24,8 @@ public interface OpenAIService {
     Answer getRagAnswer(Question question);
 
     Answer getNinjaApiCelebrityAnswer(CelebrityRQ celebrityRQ);
+
+    byte[] getImageB64Encode(ImageRQ imageRQ);
+
+    String getFileDescription(MultipartFile file) throws IOException;
 }

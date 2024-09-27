@@ -10,16 +10,25 @@ import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.chat.prompt.PromptTemplate;
 import org.springframework.ai.chat.prompt.SystemPromptTemplate;
 import org.springframework.ai.document.Document;
+import org.springframework.ai.image.ImageMessage;
+import org.springframework.ai.image.ImageOptions;
+import org.springframework.ai.image.ImageOptionsBuilder;
+import org.springframework.ai.image.ImagePrompt;
 import org.springframework.ai.model.ModelOptionsUtils;
 import org.springframework.ai.model.function.FunctionCallbackWrapper;
 import org.springframework.ai.openai.OpenAiChatModel;
 import org.springframework.ai.openai.OpenAiChatOptions;
+import org.springframework.ai.openai.OpenAiImageModel;
+import org.springframework.ai.openai.OpenAiImageOptions;
+import org.springframework.ai.openai.api.OpenAiApi;
 import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.SimpleVectorStore;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 
@@ -35,6 +44,7 @@ public class OpenAIServiceImpl implements OpenAIService {
     private final SimpleVectorStore simpleVectorStore;
     private final OpenAiChatModel openAiChatModel;
     private final NinjaApiProperties ninjaApiProperties;
+    private final OpenAiImageModel openAiImageModel;
 
     // SIN metadatos
     //@Value("classpath:templates/rag-prompt-template.st")
@@ -47,11 +57,12 @@ public class OpenAIServiceImpl implements OpenAIService {
     @Value("classpath:templates/get-capital-prompt.st")
     private Resource getCapitalPrompt;
 
-    public OpenAIServiceImpl(ChatClient.Builder chatClientBuilder, SimpleVectorStore simpleVectorStore, OpenAiChatModel openAiChatModel, NinjaApiProperties ninjaApiProperties) {
+    public OpenAIServiceImpl(ChatClient.Builder chatClientBuilder, SimpleVectorStore simpleVectorStore, OpenAiChatModel openAiChatModel, NinjaApiProperties ninjaApiProperties, OpenAiImageModel openAiImageModel) {
         this.chatClient = chatClientBuilder.build();
         this.simpleVectorStore = simpleVectorStore;
         this.openAiChatModel = openAiChatModel;
         this.ninjaApiProperties = ninjaApiProperties;
+        this.openAiImageModel = openAiImageModel;
     }
 
 
@@ -120,4 +131,38 @@ public class OpenAIServiceImpl implements OpenAIService {
         return new Answer(response.getResult().getOutput().getContent());
 
     }
+
+    @Override
+    public byte[] getImageB64Encode(ImageRQ imageRQ) {
+        var options = ImageOptionsBuilder.builder()
+                .withHeight(1024).withWidth(1024)
+                .withResponseFormat("b64_json")
+                .withModel("dall-e-3")
+                .withStyle("realistic")
+                .build();
+
+        ImagePrompt imagePrompt = new ImagePrompt(imageRQ.image(), options);
+
+        var imageResponse = openAiImageModel.call(imagePrompt);
+        return Base64.getDecoder().decode(imageResponse.getResult().getOutput().getB64Json());
+    }
+
+    @Override
+    public String getFileDescription(MultipartFile file) {
+        try {
+            ImageOptions imageOptions = OpenAiImageOptions.builder()
+                    .withModel(OpenAiApi.ChatModel.GPT_3_5_TURBO.getValue())
+                    .withHeight(1792)
+                    .withWidth(1024)
+                    .build();
+
+            ImageMessage imageMessage = new ImageMessage("Explain what do you see in this picture?");
+
+            return openAiImageModel.call(new ImagePrompt(imageMessage, imageOptions)).getResult().toString();
+        } catch (Exception e) {
+            return "Error processing the image: " + e.getMessage();
+        }
+    }
+
+
 }

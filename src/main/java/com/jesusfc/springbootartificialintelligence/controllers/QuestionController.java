@@ -1,13 +1,17 @@
 package com.jesusfc.springbootartificialintelligence.controllers;
 
-import com.jesusfc.springbootartificialintelligence.model.Answer;
-import com.jesusfc.springbootartificialintelligence.model.CapitalRQ;
-import com.jesusfc.springbootartificialintelligence.model.CelebrityRQ;
-import com.jesusfc.springbootartificialintelligence.model.Question;
+import com.jesusfc.springbootartificialintelligence.model.*;
 import com.jesusfc.springbootartificialintelligence.services.OpenAIService;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 /**
  * Author Jesús Fdez. Caraballo
@@ -41,5 +45,15 @@ public class QuestionController {
     @PostMapping("/askCelebrityCityQuestion")
     public Answer askNinjaApiCelebrityQuestion(@RequestBody CelebrityRQ celebrityRQ) {
         return openAIService.getNinjaApiCelebrityAnswer(celebrityRQ);
+    }
+
+    @PostMapping(value = "/askForImage64", produces = MediaType.IMAGE_PNG_VALUE)
+    public byte[] askForImageB64Encode(@RequestBody ImageRQ image) {
+        return openAIService.getImageB64Encode(image);
+    }
+
+    @PostMapping(value = "/askForDescriptionImage", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<String> upload(@Validated @RequestParam("file") MultipartFile file, @RequestParam("name") String name) throws IOException {
+        return ResponseEntity.ok(openAIService.getFileDescription(file));
     }
 }
