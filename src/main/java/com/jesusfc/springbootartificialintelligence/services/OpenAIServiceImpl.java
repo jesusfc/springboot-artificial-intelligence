@@ -16,11 +16,11 @@ import org.springframework.ai.image.ImageOptionsBuilder;
 import org.springframework.ai.image.ImagePrompt;
 import org.springframework.ai.model.ModelOptionsUtils;
 import org.springframework.ai.model.function.FunctionCallbackWrapper;
-import org.springframework.ai.openai.OpenAiChatModel;
-import org.springframework.ai.openai.OpenAiChatOptions;
-import org.springframework.ai.openai.OpenAiImageModel;
-import org.springframework.ai.openai.OpenAiImageOptions;
+import org.springframework.ai.openai.*;
 import org.springframework.ai.openai.api.OpenAiApi;
+import org.springframework.ai.openai.api.OpenAiAudioApi;
+import org.springframework.ai.openai.audio.speech.SpeechPrompt;
+import org.springframework.ai.openai.audio.speech.SpeechResponse;
 import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.SimpleVectorStore;
 import org.springframework.beans.factory.annotation.Value;
@@ -45,6 +45,7 @@ public class OpenAIServiceImpl implements OpenAIService {
     private final OpenAiChatModel openAiChatModel;
     private final NinjaApiProperties ninjaApiProperties;
     private final OpenAiImageModel openAiImageModel;
+    private final OpenAiAudioSpeechModel openAiAudioSpeechClient;
 
     // SIN metadatos
     //@Value("classpath:templates/rag-prompt-template.st")
@@ -57,12 +58,13 @@ public class OpenAIServiceImpl implements OpenAIService {
     @Value("classpath:templates/get-capital-prompt.st")
     private Resource getCapitalPrompt;
 
-    public OpenAIServiceImpl(ChatClient.Builder chatClientBuilder, SimpleVectorStore simpleVectorStore, OpenAiChatModel openAiChatModel, NinjaApiProperties ninjaApiProperties, OpenAiImageModel openAiImageModel) {
+    public OpenAIServiceImpl(ChatClient.Builder chatClientBuilder, SimpleVectorStore simpleVectorStore, OpenAiChatModel openAiChatModel, NinjaApiProperties ninjaApiProperties, OpenAiImageModel openAiImageModel, OpenAiAudioSpeechModel openAiAudioSpeechClient) {
         this.chatClient = chatClientBuilder.build();
         this.simpleVectorStore = simpleVectorStore;
         this.openAiChatModel = openAiChatModel;
         this.ninjaApiProperties = ninjaApiProperties;
         this.openAiImageModel = openAiImageModel;
+        this.openAiAudioSpeechClient = openAiAudioSpeechClient;
     }
 
 
@@ -162,6 +164,22 @@ public class OpenAIServiceImpl implements OpenAIService {
         } catch (Exception e) {
             return "Error processing the image: " + e.getMessage();
         }
+    }
+
+    @Override
+    public byte[] getSpeechAudio(Question question) {
+
+        OpenAiAudioSpeechOptions speechOptions = OpenAiAudioSpeechOptions.builder()
+                .withVoice(OpenAiAudioApi.SpeechRequest.Voice.ALLOY)
+                .withSpeed(1.0f)
+                .withResponseFormat(OpenAiAudioApi.SpeechRequest.AudioResponseFormat.MP3)
+                .withModel(OpenAiAudioApi.TtsModel.TTS_1.value)
+                .build();
+
+        SpeechPrompt speechPrompt = new SpeechPrompt(question.question(), speechOptions);
+        SpeechResponse response = openAiAudioSpeechClient.call(speechPrompt);
+
+        return response.getResult().getOutput();
     }
 
 

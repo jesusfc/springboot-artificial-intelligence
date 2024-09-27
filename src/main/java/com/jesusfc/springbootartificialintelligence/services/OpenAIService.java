@@ -28,4 +28,6 @@ public interface OpenAIService {
     byte[] getImageB64Encode(ImageRQ imageRQ);
 
     String getFileDescription(MultipartFile file) throws IOException;
+
+    byte[] getSpeechAudio(Question question);
 }

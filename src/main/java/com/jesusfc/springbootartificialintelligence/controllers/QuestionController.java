@@ -56,4 +56,9 @@ public class QuestionController {
     public ResponseEntity<String> upload(@Validated @RequestParam("file") MultipartFile file, @RequestParam("name") String name) throws IOException {
         return ResponseEntity.ok(openAIService.getFileDescription(file));
     }
+
+    @PostMapping(value ="/talk", produces = "audio/mpeg")
+    public byte[] assToTalk(@RequestBody Question question) {
+        return openAIService.getSpeechAudio(question);
+    }
 }
