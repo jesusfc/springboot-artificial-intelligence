@@ -1,5 +1,5 @@
 # Spring Boot with Artificial Intelligence ([SpringAI](https://spring.io/projects/spring-ai))
-
+### Using integratión of OpenAI SDK
 - Spring Boot Version 3.3.0
 - Java version 21
 - Maven project
