@@ -42,7 +42,7 @@ public class QuestionController {
         return openAIService.getRagAnswer(question);
     }
 
-    @PostMapping("/askCelebrityCityQuestion")
+    @PostMapping("/askCelebrityQuestion")
     public Answer askNinjaApiCelebrityQuestion(@RequestBody CelebrityRQ celebrityRQ) {
         return openAIService.getNinjaApiCelebrityAnswer(celebrityRQ);
     }
