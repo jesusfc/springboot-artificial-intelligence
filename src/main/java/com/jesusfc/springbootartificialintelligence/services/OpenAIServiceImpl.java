@@ -140,7 +140,7 @@ public class OpenAIServiceImpl implements OpenAIService {
                 .withHeight(1024).withWidth(1024)
                 .withResponseFormat("b64_json")
                 .withModel("dall-e-3")
-                .withStyle("realistic")
+                .withStyle("vivid")
                 .build();
 
         ImagePrompt imagePrompt = new ImagePrompt(imageRQ.image(), options);
