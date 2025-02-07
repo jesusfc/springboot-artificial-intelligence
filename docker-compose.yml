@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+  server:
+    build: .
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      - OPEN_AI_API_KEY=### USE_YOUR_OPEN_AI_API_KEY ##
+      - NINJA_API_KEY=### USE_YOUR_OPEN_AI_API_KEY ##
+

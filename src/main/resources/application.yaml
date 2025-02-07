@@ -14,7 +14,7 @@ spring:
           model: gpt-4-turbo
 rag:
   aiapp:
-    vectorStorePath: src/main/resources/vectorStore.json
+    vectorStorePath: ../vectorStore.json
     documentsToLoad:
       - classpath:/movies500.csv
 ninja-api:
